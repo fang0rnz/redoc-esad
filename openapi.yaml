@@ -1,0 +1,1303 @@
+info:
+  title: ESAD
+  version: 1.0.0
+  description: 'Documentação da API do site [https://meuesad.com.br](https://meuesad.com.br).'
+  contact:
+    email: contato@conceptho.com
+host: api.meuesad.com.br
+basePath: /v1
+tags:
+  - name: appointment
+    description: Atividade
+  - name: auth
+    description: Autenticação.
+  - name: contact
+    description: Contato.
+  - name: contract
+    description: Contrato
+  - name: file
+    description: Arquivo
+  - name: invoice
+    description: Fatura
+  - name: lawsuit
+    description: Processo.
+  - name: plan
+    description: Plano
+  - name: profile
+    description: Perfil.
+  - name: progress
+    description: Andamento
+  - name: reminder
+    description: Lembrete
+  - name: subject
+    description: Matéria
+  - name: subscription
+    description: Inscrição
+  - name: user
+    description: Usuario.
+  - name: workspace
+    description: Ambiente de trabalho.
+swagger: '2.0'
+paths:
+  '/workspaces/{workspaceId}/appointments':
+    get:
+      tags:
+        - appointment
+      summary: Lista os lembretes deste ambiente de trabalho.
+      description: Retorna os lembretes deste ambiente de trabalho.
+      operationId: indexAppointment
+      parameters:
+        - $ref: '#/parameters/workspaceId'
+      responses:
+        '200':
+          description: Operação realizada com sucesso.
+          schema:
+            $ref: '#/definitions/Appointments'
+        '400':
+          $ref: '#/responses/Standard400Response'
+        '403':
+          $ref: '#/responses/Standard403Response'
+        '500':
+          $ref: '#/responses/Standard500Response'
+  '/workspaces/{workspaceId}/appointments/{appointmentId}':
+    get:
+      tags:
+        - appointment
+      summary: Pega um lembrete deste ambiente de trabalho.
+      description: Retorna o lembrete de ID appointmentId do ambiente de trabalho de ID workspaceId.
+      operationId: showAppointment
+      parameters:
+        - $ref: '#/parameters/workspaceId'
+        - $ref: '#/parameters/appointmentId'
+      responses:
+        '200':
+          description: Operação realizada com sucesso.
+          schema:
+            $ref: '#/definitions/Appointment'
+        '400':
+          $ref: '#/responses/Standard400Response'
+        '403':
+          $ref: '#/responses/Standard403Response'
+        '500':
+          $ref: '#/responses/Standard500Response'
+  /auth:
+    post:
+      tags:
+        - auth
+      summary: Realiza login de um usuario
+      description: 'Realiza a autenticação do usuario ao sistema retornando, seu token de autenticação para utilização da API.'
+      operationId: login
+      parameters:
+        - name: body
+          in: body
+          schema:
+            $ref: '#/definitions/UserDraft'
+      responses:
+        '200':
+          description: Operação realizada com sucesso.
+          schema:
+            $ref: '#/definitions/Auth'
+        '400':
+          $ref: '#/responses/Standard400Response'
+        '500':
+          $ref: '#/responses/Standard500Response'
+  '/workspaces/{workspaceId}/contacts':
+    get:
+      tags:
+        - contact
+      summary: Lista os Contatos de um Ambiente de Trabalho
+      description: Retorna os contatos deste ambiente de trabalho
+      operationId: indexContacts
+      parameters:
+        - $ref: '#/parameters/workspaceId'
+      responses:
+        '200':
+          description: Operação realizada com sucesso.
+          schema:
+            $ref: '#/definitions/Contacts'
+        '400':
+          $ref: '#/responses/Standard400Response'
+        '403':
+          $ref: '#/responses/Standard403Response'
+        '500':
+          $ref: '#/responses/Standard500Response'
+  '/workspaces/{workspaceId}/contacts/{contactId}':
+    get:
+      tags:
+        - contact
+      summary: Pega um contato com este ID de contato neste ambiente de trabalho.
+      description: Retorna um contato com o ID de valor contactId do ambiente de trabalho de ID workspaceId.
+      operationId: showContact
+      parameters:
+        - $ref: '#/parameters/workspaceId'
+        - $ref: '#/parameters/contactId'
+      responses:
+        '200':
+          description: Operação realizada com sucesso.
+          schema:
+            $ref: '#/definitions/Contact'
+        '400':
+          $ref: '#/responses/Standard400Response'
+        '403':
+          $ref: '#/responses/Standard403Response'
+        '500':
+          $ref: '#/responses/Standard500Response'
+  '/workspaces/{workspaceId}/contracts':
+    get:
+      tags:
+        - contract
+      summary: Lista os Contratos de um Ambiente de Trabalho
+      description: Retorna os contatos deste ambiente de trabalho
+      operationId: indexContracts
+      parameters:
+        - $ref: '#/parameters/workspaceId'
+      responses:
+        '200':
+          description: Operação realizada com sucesso.
+          schema:
+            $ref: '#/definitions/Contracts'
+        '400':
+          $ref: '#/responses/Standard400Response'
+        '403':
+          $ref: '#/responses/Standard403Response'
+        '500':
+          $ref: '#/responses/Standard500Response'
+  '/workspaces/{workspaceId}/contracts/{contractId}':
+    get:
+      tags:
+        - contract
+      summary: Pega um contrato com este ID de contrato neste ambiente de trabalho.
+      description: Retorna um contrato com o ID de valor contractId do ambiente de trabalho de ID workspaceId.
+      operationId: showContract
+      parameters:
+        - $ref: '#/parameters/workspaceId'
+        - $ref: '#/parameters/contractId'
+      responses:
+        '200':
+          description: Operação realizada com sucesso.
+          schema:
+            $ref: '#/definitions/Contract'
+        '400':
+          $ref: '#/responses/Standard400Response'
+        '403':
+          $ref: '#/responses/Standard403Response'
+        '500':
+          $ref: '#/responses/Standard500Response'
+  '/workspaces/{workspaceId}/files':
+    get:
+      tags:
+        - file
+      summary: Lista os arquivos de um ambiente de trabalho.
+      description: Retorna a lista dos arquivos pertencentes a este ambiente de trabalho.
+      operationId: indexFile
+      parameters:
+        - $ref: '#/parameters/workspaceId'
+      responses:
+        '200':
+          description: Operação realizada com sucesso.
+          schema:
+            $ref: '#/definitions/Files'
+        '400':
+          $ref: '#/responses/Standard400Response'
+        '403':
+          $ref: '#/responses/Standard403Response'
+        '500':
+          $ref: '#/responses/Standard500Response'
+  '/workspaces/{workspaceId}/files/{fileId}':
+    get:
+      tags:
+        - file
+      summary: Pega um arquivo de um ambiente de trabalho.
+      description: Retorna um arquivo deste ambiente de trabalho.
+      operationId: showFile
+      parameters:
+        - $ref: '#/parameters/workspaceId'
+        - $ref: '#/parameters/fileId'
+      responses:
+        '200':
+          description: Operação realizada com sucesso.
+          schema:
+            $ref: '#/definitions/File'
+        '400':
+          $ref: '#/responses/Standard400Response'
+        '403':
+          $ref: '#/responses/Standard403Response'
+        '500':
+          $ref: '#/responses/Standard500Response'
+  '/workspaces/{workspaceId}/lawsuits':
+    get:
+      tags:
+        - lawsuit
+      summary: Lista todos os processos neste ambiente de trabalho.
+      description: Retorna a lista de processos deste ambiente de trabalho.
+      operationId: indexLawsuit
+      parameters:
+        - $ref: '#/parameters/workspaceId'
+      responses:
+        '200':
+          description: Operação realizada com sucesso.
+          schema:
+            $ref: '#/definitions/Lawsuits'
+        '400':
+          $ref: '#/responses/Standard400Response'
+        '403':
+          $ref: '#/responses/Standard403Response'
+        '500':
+          $ref: '#/responses/Standard500Response'
+  '/workspaces/{workspaceId}/lawsuits/{lawsuitId}':
+    get:
+      tags:
+        - lawsuit
+      summary: Pega um processo deste ambiente de trabalho.
+      description: Retorna o processo de ID lawsuitId do ambiente de trabalho de ID workspaceId.
+      operationId: showLawsuit
+      parameters:
+        - $ref: '#/parameters/workspaceId'
+        - $ref: '#/parameters/lawsuitId'
+      responses:
+        '200':
+          description: Operação realizada com sucesso.
+          schema:
+            $ref: '#/definitions/Lawsuit'
+        '400':
+          $ref: '#/responses/Standard400Response'
+        '403':
+          $ref: '#/responses/Standard403Response'
+        '500':
+          $ref: '#/responses/Standard500Response'
+  /plans:
+    get:
+      tags:
+        - plan
+      summary: Lista os planos disponiveis para contratação.
+      description: Retorna todos os planos disponiveis para contratação.
+      operationId: indexPlan
+      responses:
+        '200':
+          description: Operação realizada com sucesso.
+          schema:
+            $ref: '#/definitions/Plans'
+        '400':
+          $ref: '#/responses/Standard400Response'
+        '403':
+          $ref: '#/responses/Standard403Response'
+        '500':
+          $ref: '#/responses/Standard500Response'
+  '/profiles/{profileId}':
+    put:
+      tags:
+        - profile
+      summary: Atualizar o perfil de um usuario.
+      description: Alteraça as informações do perfil do usuario de ID profileId.
+      operationId: updateProfile
+      parameters:
+        - $ref: '#/parameters/profileId'
+        - name: body
+          in: body
+          schema:
+            $ref: '#/definitions/ProfileDraft'
+      responses:
+        '200':
+          description: Operação realizada com sucesso.
+          schema:
+            $ref: '#/definitions/Profile'
+        '400':
+          $ref: '#/responses/Standard400Response'
+        '403':
+          $ref: '#/responses/Standard403Response'
+        '500':
+          $ref: '#/responses/Standard500Response'
+  '/workspaces/{workspaceId}/lawsuits/{lawsuitId}/progresses':
+    get:
+      tags:
+        - progress
+      summary: Lista todos os andamentos de um processo dentro do ambiente de trabalho.
+      description: Retorna os andamentos de um processo dentro de um ambiente de trabalho.
+      operationId: indexProgress
+      parameters:
+        - $ref: '#/parameters/workspaceId'
+        - $ref: '#/parameters/lawsuitId'
+      responses:
+        '200':
+          description: Operação realizada com sucesso.
+          schema:
+            $ref: '#/definitions/Progresses'
+        '400':
+          $ref: '#/responses/Standard400Response'
+        '403':
+          $ref: '#/responses/Standard403Response'
+        '500':
+          $ref: '#/responses/Standard500Response'
+  /subjects:
+    get:
+      tags:
+        - subject
+      summary: Indexa as matérias
+      description: Retorna um vetor contendo os tipos de matéria disponíveis.
+      operationId: indexSubject
+      parameters:
+        - $ref: '#/parameters/page'
+      responses:
+        '200':
+          description: Operação realizada com sucesso.
+          schema:
+            $ref: '#/definitions/Subjects'
+        '400':
+          $ref: '#/responses/Standard400Response'
+        '403':
+          $ref: '#/responses/Standard403Response'
+        '500':
+          $ref: '#/responses/Standard500Response'
+  '/subjects/{subjectId}':
+    get:
+      tags:
+        - subject
+      summary: Pega uma matéria.
+      description: Retorna a matéria com aquele ID.
+      operationId: showSubject
+      parameters:
+        - $ref: '#/parameters/subjectId'
+      responses:
+        '200':
+          description: Operação realizada com sucesso.
+          schema:
+            $ref: '#/definitions/Subject'
+        '400':
+          $ref: '#/responses/Standard400Response'
+        '403':
+          $ref: '#/responses/Standard403Response'
+        '500':
+          $ref: '#/responses/Standard500Response'
+  /subscriptions:
+    get:
+      tags:
+        - subscription
+      summary: Indexa as assinaturas
+      description: Retorna um vetor contendo as assinaturas do sistema.
+      operationId: indexSubscription
+      parameters:
+        - $ref: '#/parameters/page'
+      responses:
+        '200':
+          description: Operação realizada com sucesso.
+          schema:
+            $ref: '#/definitions/Subscriptions'
+        '400':
+          $ref: '#/responses/Standard400Response'
+        '403':
+          $ref: '#/responses/Standard403Response'
+        '500':
+          $ref: '#/responses/Standard500Response'
+  '/subscriptions/{subscriptionId}':
+    get:
+      tags:
+        - subscription
+      summary: Pega uma assinatura.
+      description: Retorna a assinatura com aquele ID.
+      operationId: showSubscription
+      parameters:
+        - $ref: '#/parameters/subscriptionId'
+      responses:
+        '200':
+          description: Operação realizada com sucesso.
+          schema:
+            $ref: '#/definitions/Subscription'
+        '400':
+          $ref: '#/responses/Standard400Response'
+        '403':
+          $ref: '#/responses/Standard403Response'
+        '500':
+          $ref: '#/responses/Standard500Response'
+  /users:
+    get:
+      tags:
+        - user
+      summary: Indexa os Usuários
+      description: Retorna um vetor contendo os Ambientes de Trabalho ao qual o usuário logado pertence ou é dono.
+      operationId: indexUser
+      parameters:
+        - $ref: '#/parameters/page'
+      responses:
+        '200':
+          description: Operação realizada com sucesso.
+          schema:
+            $ref: '#/definitions/Users'
+        '400':
+          $ref: '#/responses/Standard400Response'
+        '403':
+          $ref: '#/responses/Standard403Response'
+        '500':
+          $ref: '#/responses/Standard500Response'
+    post:
+      tags:
+        - user
+      summary: Cria um novo Usuario
+      description: Cria um usuário com as informações passadas no corpo da requisição.
+      operationId: createUser
+      parameters:
+        - name: body
+          in: body
+          schema:
+            $ref: '#/definitions/UserDraft'
+      responses:
+        '200':
+          description: Operação realizada com sucesso.
+          schema:
+            $ref: '#/definitions/User'
+        '400':
+          $ref: '#/responses/Standard400Response'
+        '500':
+          $ref: '#/responses/Standard500Response'
+  '/users/{userId}':
+    get:
+      tags:
+        - user
+      summary: Pega um usuário.
+      description: Retorna o usuário com aquele ID.
+      operationId: showUser
+      parameters:
+        - $ref: '#/parameters/userId'
+      responses:
+        '200':
+          description: Operação realizada com sucesso.
+          schema:
+            $ref: '#/definitions/User'
+        '400':
+          $ref: '#/responses/Standard400Response'
+        '403':
+          $ref: '#/responses/Standard403Response'
+        '500':
+          $ref: '#/responses/Standard500Response'
+  /workspaces:
+    get:
+      tags:
+        - workspace
+      summary: Indexa os Ambientes de Trabalho
+      description: Retorna um vetor contendo os Ambientes de Trabalho ao qual o usuário logado pertence ou é dono.
+      operationId: indexWorkspace
+      parameters:
+        - $ref: '#/parameters/page'
+      responses:
+        '200':
+          description: Operação realizada com sucesso.
+          schema:
+            $ref: '#/definitions/Workspaces'
+        '400':
+          $ref: '#/responses/Standard400Response'
+        '403':
+          $ref: '#/responses/Standard403Response'
+        '500':
+          $ref: '#/responses/Standard500Response'
+  '/workspaces/{workspaceId}':
+    get:
+      tags:
+        - workspace
+      summary: Pega um ambiente de trabalho.
+      description: Retorna o Ambiente de Trabalho com aquele ID.
+      operationId: showWorkspace
+      parameters:
+        - $ref: '#/parameters/workspaceId'
+      responses:
+        '200':
+          description: Operação realizada com sucesso.
+          schema:
+            $ref: '#/definitions/Workspace'
+        '400':
+          $ref: '#/responses/Standard400Response'
+        '403':
+          $ref: '#/responses/Standard403Response'
+        '500':
+          $ref: '#/responses/Standard500Response'
+definitions:
+  Error:
+    properties:
+      title:
+        type: string
+      message:
+        type: string
+      errors:
+        type: array
+        items:
+          $ref: '#/definitions/GenericObject'
+  GenericObject:
+    type: object
+  Auth:
+    properties:
+      token:
+        type: string
+      is_valid:
+        type: boolean
+  Period:
+    type: object
+    properties:
+      seconds:
+        type: integer
+      minutes:
+        type: integer
+      hours:
+        type: integer
+      days:
+        type: integer
+      weeks:
+        type: integer
+      months:
+        type: integer
+      years:
+        type: integer
+  Appointment:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: Código de identificação
+      name:
+        type: string
+        description: Nome identificador
+      date:
+        type: string
+        format: date-time
+        description: Data da atividade
+      lawsuit_id:
+        type: integer
+        description: Código de identificação do processo
+      workspace_id:
+        type: integer
+        description: Código de identificação do workspace
+      created_at:
+        type: string
+        format: date-time
+        description: Data e hora de criação da entidade
+      updated_at:
+        type: string
+        format: date-time
+        description: Data e hora da última atualização da entidade
+      lawsuit:
+        $ref: '#/definitions/Lawsuit'
+      workspace:
+        $ref: '#/definitions/Workspace'
+      reminders:
+        $ref: '#/definitions/Reminders'
+      contacts:
+        $ref: '#/definitions/Contacts'
+  Appointments:
+    type: array
+    items:
+      $ref: '#/definitions/Appointment'
+  Contact:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: Código de identificação
+      cellphone:
+        type: string
+        description: Número do celular
+      phone:
+        type: string
+        description: Número do telefone fixo
+      email:
+        type: string
+        description: Endereço de e-mail
+      fullname:
+        type: string
+        description: Nome completo
+      company:
+        type: string
+        description: Empresa
+      alias:
+        type: string
+        description: Apelido
+      type:
+        type: string
+        description: Tipo de contato
+        enum:
+          - lawyer
+          - client
+          - intern
+          - partner
+          - organization
+          - other
+      profile_id:
+        description: Código de identificação do perfil
+        type: integer
+      workspace_id:
+        description: Código de identificação do workspace
+        type: integer
+      created_at:
+        description: Data e hora de criação da entidade
+        type: string
+        format: date-time
+      updated_at:
+        description: Data e hora da última atualização da entidade
+        type: string
+        format: date-time
+      profile:
+        $ref: '#/definitions/Profile'
+      workspace:
+        $ref: '#/definitions/Workspace'
+  Contacts:
+    type: array
+    items:
+      $ref: '#/definitions/Contact'
+  Contract:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: Código de identificação
+      honorarium_calculated:
+        type: number
+        description: Honorários calculados pelo sistema
+      honorarium_inserted:
+        description: Honorários inseridos pelo usuário
+        type: number
+      profit_margin:
+        description: Margem de lucro
+        type: number
+      monthly_hours:
+        description: Quantidade de horas mensais
+        type: integer
+      number_of_months:
+        description: Quantidade de meses
+        type: integer
+      type:
+        description: Tipo
+        type: string
+        enum:
+          - drafted
+          - generated
+      client_id:
+        description: Código de identificação do cliente
+        type: integer
+      workspace_id:
+        description: Código de identificação do workspace
+        type: integer
+      created_at:
+        description: Data e hora de criação da entidade
+        type: string
+        format: date-time
+      updated_at:
+        description: Data e hora da última atualização da entidade
+        type: string
+        format: date-time
+      client:
+        $ref: '#/definitions/Contact'
+      workspace:
+        $ref: '#/definitions/Workspace'
+      lawsuits:
+        $ref: '#/definitions/Lawsuits'
+      interested:
+        $ref: '#/definitions/Contacts'
+  Contracts:
+    type: array
+    items:
+      $ref: '#/definitions/Contract'
+  File:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: Código de identificação
+      name:
+        type: string
+        description: Nome do arquivo
+      url:
+        type: string
+        description: URL do arquivo
+      mime_type:
+        type: string
+        description: MIME type do arquivo
+      size:
+        type: integer
+        description: Tamanho do arquivo
+      workspace_id:
+        type: integer
+        description: Código de identificação do workspace
+      created_at:
+        type: string
+        format: date-time
+        description: Data e hora de criação da entidade
+      updated_at:
+        type: string
+        format: date-time
+        description: Data e hora da última atualização da entidade
+      workspace:
+        $ref: '#/definitions/Workspace'
+  Files:
+    type: array
+    items:
+      $ref: '#/definitions/File'
+  Invoice:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: Código de identificação
+      amount:
+        type: number
+        description: Valor
+      metadata:
+        type: string
+        description: Metadados
+      transaction_id:
+        type: string
+        description: Código de identificação da transação
+      subscription_id:
+        type: integer
+        description: Código de identificação da assinatura
+      status:
+        type: string
+        description: Status da cobrança
+        enum:
+          - authorized
+          - charged_back
+          - paid
+          - pending_refund
+          - processing
+          - refunded
+          - refused
+          - waiting_payment
+      created_at:
+        type: string
+        format: date-time
+        description: Data e hora de criação da entidade
+      updated_at:
+        type: string
+        format: date-time
+        description: Data e hora da última atualização da entidade
+  Invoices:
+    type: array
+    items:
+      $ref: '#/definitions/Invoice'
+  Lawsuit:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: Código de identificação
+      process_number:
+        type: string
+        description: Número do processo
+      status:
+        type: string
+        description: Status do processo
+      phase:
+        type: string
+        enum:
+          - acknowledgement
+          - recursal
+          - execution
+        description: Fase
+      subject_id:
+        type: integer
+        description: Código de identificação da matéria
+      workspace_id:
+        type: integer
+        description: Código de identificação do workspace
+      client_id:
+        type: integer
+        description: Código de identificação do cliente
+      contract_id:
+        type: integer
+        description: Código de identificação do contrato
+      hiring_date:
+        type: string
+        format: date-time
+        description: Data de assinatura do contrato
+      created_at:
+        type: string
+        format: date-time
+        description: Data e hora de criação da entidade
+      updated_at:
+        type: string
+        format: date-time
+        description: Data e hora da última atualização da entidade
+      client:
+        $ref: '#/definitions/Contact'
+      contract:
+        $ref: '#/definitions/Contract'
+      subject:
+        $ref: '#/definitions/Subject'
+      workspace:
+        $ref: '#/definitions/Workspace'
+      active_parts:
+        type: array
+        description: Partes ativas
+        items:
+          $ref: '#/definitions/Contact'
+      passive_parts:
+        type: array
+        description: Partes passivas
+        items:
+          $ref: '#/definitions/Contact'
+      progresses:
+        type: array
+        description: Progressos
+        items:
+          $ref: '#/definitions/Progress'
+      interested:
+        description: Interessados ao processo
+        $ref: '#/definitions/Contacts'
+  Lawsuits:
+    type: array
+    items:
+      $ref: '#/definitions/Lawsuit'
+  Plan:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: Código de identificação
+      price:
+        type: number
+        description: Preço
+      price_per_lawsuit:
+        type: number
+        description: Preço por processo
+      max_users:
+        type: integer
+        description: Número máximo de usuários
+      max_lawsuits:
+        type: integer
+        description: Número máximo de processos
+      can_use_calculator:
+        type: boolean
+        description: Pode ou não utilizar a calculadora
+      can_store_file:
+        type: boolean
+        description: Pode ou não utilizar o armazenamento de arquivos
+      can_send_feedback:
+        type: boolean
+        description: Pode ou não enviar feedback
+      created_at:
+        type: string
+        format: date-time
+        description: Data e hora de criação da entidade
+      updated_at:
+        type: string
+        format: date-time
+        description: Data e hora da última atualização da entidade
+      period:
+        $ref: '#/definitions/Period'
+  Plans:
+    type: array
+    items:
+      $ref: '#/definitions/Plan'
+  Profile:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: Código de identificação
+      cpf:
+        type: string
+        description: Número do CPF
+      oab:
+        type: string
+        description: Número da OAB
+      cellphone:
+        type: string
+        description: Número do celular
+      phone:
+        type: string
+        description: Número do telefone fixo
+      office_name:
+        type: string
+        description: Nome do escritório
+      user_id:
+        type: integer
+        description: Código de identificação do usuário
+      created_at:
+        type: string
+        format: date-time
+        description: Data e hora de criação da entidade
+      updated_at:
+        type: string
+        format: date-time
+        description: Data e hora da última atualização da entidade
+      user:
+        $ref: '#/definitions/User'
+      contacts:
+        $ref: '#/definitions/Contacts'
+  ProfileDraft:
+    type: object
+    properties:
+      cpf:
+        type: string
+        description: Número do CPF
+      oab:
+        type: string
+        description: Número da OAB
+      cellphone:
+        type: string
+        description: Número do celular
+      phone:
+        type: string
+        description: Número do telefone fixo
+      office_name:
+        type: string
+        description: Nome do escritório
+  Profiles:
+    type: array
+    items:
+      $ref: '#/definitions/Profile'
+  Progress:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: Código de identificação
+      localization:
+        type: string
+        description: Local onde o andamento ocorreu
+      description:
+        type: string
+        description: Descrição
+      date:
+        type: string
+        format: date-time
+        description: Data
+      lawsuit_id:
+        type: integer
+        description: Código de identificação do processo
+      created_at:
+        type: string
+        format: date-time
+        description: Data e hora de criação da entidade
+      updated_at:
+        type: string
+        format: date-time
+        description: Data e hora da última atualização da entidade
+      lawsuit:
+        $ref: '#/definitions/Lawsuit'
+  Progresses:
+    type: array
+    items:
+      $ref: '#/definitions/Progress'
+  Reminder:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: Código de identificação
+      ahead:
+        type: integer
+        description: Quantidade de tempo em antecedência da notificação
+      status:
+        type: string
+        enum:
+          - pending
+          - sent
+        description: Status de envio da notificação
+      appointment_id:
+        type: integer
+        description: Código de identificação da atividade
+      created_at:
+        type: string
+        format: date-time
+        description: Data e hora de criação da entidade
+      updated_at:
+        type: string
+        format: date-time
+        description: Data e hora da última atualização da entidade
+      appointment:
+        $ref: '#/definitions/Appointment'
+  Reminders:
+    type: array
+    items:
+      $ref: '#/definitions/Reminder'
+  Setting:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: Código de identificação
+      monthly_withdrawal_amount:
+        type: number
+        description: Quantidade de retirada mensal
+      fixed_cost_per_month:
+        type: number
+        description: Custo fixado ao mês
+      daily_workload:
+        type: integer
+        description: Carga horária diária
+      tax:
+        type: number
+        description: Imposto
+      workspace_id:
+        type: integer
+        description: Código de identificação do workspace
+      created_at:
+        type: string
+        format: date-time
+        description: Data e hora de criação da entidade
+      updated_at:
+        type: string
+        format: date-time
+        description: Data e hora da última atualização da entidade
+      workspace:
+        $ref: '#/definitions/Workspace'
+  Settings:
+    type: array
+    items:
+      $ref: '#/definitions/Setting'
+  Subject:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: Código de identificação
+      name:
+        type: string
+        description: Nome
+      created_at:
+        type: string
+        format: date-time
+        description: Data e hora de criação da entidade
+      updated_at:
+        type: string
+        format: date-time
+        description: Data e hora da última atualização da entidade
+  Subjects:
+    type: array
+    items:
+      $ref: '#/definitions/Subject'
+  Subscription:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: Código de identificação
+      begin_date:
+        type: string
+        format: date-time
+        description: Data de início
+      end_date:
+        type: string
+        format: date-time
+        description: Data de expiração
+      status:
+        type: string
+        enum:
+          - active
+          - expired
+        description: Status
+      plan_id:
+        type: integer
+        description: Código de identificação do plano
+      workspace_id:
+        type: integer
+        description: Código de identificação do workspace
+      created_at:
+        type: string
+        format: date-time
+        description: Data e hora de criação da entidade
+      updated_at:
+        type: string
+        format: date-time
+        description: Data e hora da última atualização da entidade
+      plan:
+        $ref: '#/definitions/Plan'
+      workspace:
+        $ref: '#/definitions/Workspace'
+  Subscriptions:
+    type: array
+    items:
+      $ref: '#/definitions/Subscription'
+  User:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: Código de identificação
+      email:
+        type: string
+        description: Endereço de e-mail
+      password:
+        type: string
+        description: Senha
+      token:
+        type: string
+        description: Token de autenticação
+      facebook_token:
+        type: string
+        description: Token da API do facebook
+      facebook_id:
+        type: string
+        description: Código de identificação do facebook
+      profile:
+        $ref: '#/definitions/Profile'
+      created_at:
+        type: string
+        format: date-time
+        description: Data e hora de criação da entidade
+      updated_at:
+        type: string
+        format: date-time
+        description: Data e hora da última atualização da entidade
+      workspaces:
+        $ref: '#/definitions/Workspaces'
+  UserDraft:
+    type: object
+    properties:
+      email:
+        type: string
+        description: Endereço de e-mail
+      password:
+        type: string
+        description: Senha
+      facebook_token:
+        type: string
+        description: Token da API do facebook
+      facebook_id:
+        type: string
+        description: Código de identificação do facebook
+      retrieve_token:
+        type: boolean
+  Users:
+    type: array
+    items:
+      $ref: '#/definitions/User'
+  Workspace:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: Código de identificação
+      name:
+        type: string
+        description: Nome
+      created_at:
+        description: Data e hora da criação da entidade
+        type: string
+        format: date-time
+      updated_at:
+        description: Data e hora da última atualização da entidade
+        type: string
+        format: date-time
+      owner_id:
+        description: Código de identificação do dono do workspace
+        type: integer
+      owner:
+        $ref: '#/definitions/User'
+      setting:
+        $ref: '#/definitions/Setting'
+      users:
+        $ref: '#/definitions/Users'
+      contacts:
+        $ref: '#/definitions/Contacts'
+      lawsuits:
+        $ref: '#/definitions/Lawsuits'
+      contracts:
+        $ref: '#/definitions/Contracts'
+      appointments:
+        $ref: '#/definitions/Appointments'
+  Workspaces:
+    type: array
+    items:
+      $ref: '#/definitions/Workspace'
+responses:
+  Standard500Response:
+    description: Um Erro inesperado ocorreu.
+    schema:
+      $ref: '#/definitions/Error'
+  Standard400Response:
+    description: Pedido Ruim.
+    schema:
+      $ref: '#/definitions/Error'
+  Standard415Response:
+    description: Tipo de Midia não suportado.
+    schema:
+      $ref: '#/definitions/Error'
+  Standard404Response:
+    description: Não encontrado.
+    schema:
+      $ref: '#/definitions/Error'
+  Standard403Response:
+    description: Acesso negado.
+    schema:
+      $ref: '#/definitions/Error'
+parameters:
+  id:
+    name: id
+    in: path
+    description: ID do objeto
+    required: true
+    type: integer
+  workspaceId:
+    name: workspaceId
+    in: path
+    description: ID do Ambiente de trabalho
+    required: true
+    type: integer
+  contactId:
+    name: contactId
+    in: path
+    description: ID do Contato
+    required: true
+    type: integer
+  lawsuitId:
+    name: lawsuitId
+    in: path
+    description: ID do processo
+    required: true
+    type: integer
+  fileId:
+    name: fileId
+    in: path
+    description: ID do arquivo
+    required: true
+    type: integer
+    format: integer
+  profileId:
+    name: profileId
+    in: path
+    description: ID do perfil
+    type: integer
+    required: true
+  contractId:
+    name: contractId
+    in: path
+    description: ID do contrato
+    type: integer
+    required: true
+  appointmentId:
+    name: appointmentId
+    in: path
+    description: ID da atividade
+    required: true
+    type: integer
+  userId:
+    name: userId
+    in: path
+    description: ID do usuário
+    required: true
+    type: integer
+  subjectId:
+    name: subjectId
+    in: path
+    description: ID da matéria
+    required: true
+    type: integer
+  subscriptionId:
+    name: subscriptionId
+    in: path
+    description: ID da assinatura
+    required: true
+    type: integer
+  pageSize:
+    name: pageSize
+    in: query
+    description: Numero de objetos a ser retornado
+    type: integer
+    minimum: 0
+    exclusiveMinimum: false
+    maximum: 100
+    exclusiveMaximum: false
+    multipleOf: 10
+  page:
+    name: page
+    in: query
+    description: Numero da página
+    type: integer
+securityDefinitions: {}
