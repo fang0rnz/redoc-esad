@@ -1,0 +1,7 @@
+specFileName: ./swagger.json
+apiTitle: esad
+splitSpec: false
+codeSamples: false
+swaggerUI: false
+travis: false
+oasVersion: '2.0'
